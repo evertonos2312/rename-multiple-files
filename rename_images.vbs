@@ -26,36 +26,38 @@ totalCopyError = 0
 LogCopyDup = ""
 totalCopyDup = 0
 tempName = ""
+madeBy = "By: Everton Silva"
+
 
 Dim FolderPath
-FolderPath = InputBox("Paste the full path of the folder.")
+FolderPath = InputBox("Paste the full path of the folder.", madeBy)
 If FolderPath = "" Then
-    MsgBox("See you soon")
+    MsgBox "See you soon", vbOKOnly, madeBy
     Wscript.Quit
 End If
 
 Do Until FSO.FolderExists(FolderPath)
-    FolderPath = InputBox("Paste the full path of the folder.")
+    FolderPath = InputBox("Paste the full path of the folder.", madeBy)
     If FolderPath = "" Then
-        MsgBox("See you soon")
+        MsgBox "See you soon", vbOKOnly, madeBy
         Wscript.Quit
     End If
 Loop
 scriptdir = CreateObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName)
 
 Do While FolderPath = scriptdir
-    MsgBox("Please put the executable file in a different folder")
-    FolderPath = InputBox("Paste the full path of the folder.")
+    MsgBox "Please put the executable file in a different folder", vbOKOnly, madeBy
+    FolderPath = InputBox("Paste the full path of the folder.", madeBy)
         If FolderPath = "" Then
-            MsgBox("See you soon")
+            MsgBox "See you soon", vbOKOnly, madeBy
             Wscript.Quit
         End If
 Loop
 
 Dim PrefixName
-PrefixName = InputBox("Choose a new prefix for the files.")
+PrefixName = InputBox("Choose a new prefix for the files.", madeBy)
 If PrefixName = "" Then
-    MsgBox("See you soon")
+    MsgBox "See you soon", vbOKOnly, madeBy
     Wscript.Quit
 End If
 
@@ -105,4 +107,4 @@ set LogFile = FSO.CreateTextFile("arquivos.log", True)
 LogFile.WriteLine(LogCopyTxt)
 LogFile.Close
 
-MsgBox("Finished!" & vbCrlf & totalRenamedFiles & " renamed files!" & vbCrlf & totalNotRenamed & " unrenamed files!" & vbCrlf & TempoExec & " seconds of execution!")
+MsgBox "Finished!" & vbCrlf & totalRenamedFiles & " renamed files!" & vbCrlf & totalNotRenamed & " unrenamed files!" & vbCrlf & TempoExec & " seconds of execution!", vbOKOnly, madeBy
